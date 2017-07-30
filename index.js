@@ -9,3 +9,10 @@ HomerDashboard = (function(){
 		};
 	}
 })();
+
+HomerDashboardData = (function(){
+	
+	return function(dataTarget){
+		
+	}
+})();
