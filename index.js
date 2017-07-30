@@ -4,6 +4,7 @@ HomerDashboard = (function(){
 	return function(homerDashboardData){
 		this.class = 'homer-dashboard'; // name of class HomerDashboard should search for
 		this.entity = document.querySelector(`.${this.class}[data-target="${homerDashboardData.name}"]`); 
+		this.body = {};
 		
 		this.show = function(){
 			try{
@@ -15,9 +16,23 @@ HomerDashboard = (function(){
 		};
 		
 		this.__proto__.build = function(){
-			var container = document.createElement('div');
-			container.className = 'content';
-			this.entity.append(container);
+			self = this;
+			
+			header = document.createElement('div');
+			header.className = 'header';
+			
+			content = document.createElement('div');
+			content.className = 'content';
+			
+			'column-left bar-down chart legend right-cell number'
+				.split(' ')
+				.forEach(className => {
+					var element = document.createElement('div');
+					element.className = className;
+					content.appendChild(element);
+				});
+				
+			this.entity.append(header, content);
 		};
 	}
 })();
