@@ -1,7 +1,9 @@
 HomerDashboard = (function(){
 	
 	// constructor
-	return function(homerDashboardData){
+	return function(dto){
+		homerDashboardData = new HomerDashboardData(dto);
+		
 		this.class = 'homer-dashboard'; // name of class HomerDashboard should search for
 		this.entity = document.querySelector(`.${this.class}[data-target="${homerDashboardData.name}"]`); 
 		this.body = {};
@@ -10,6 +12,7 @@ HomerDashboard = (function(){
 			try{
 				if(!this.entity) throw 'entity not found';
 				this.build();
+				this.entity.style.display = 'block';
 			}catch(e){
 				console.log('Cannot show dashboard caused by: ', e);
 			}
@@ -20,6 +23,7 @@ HomerDashboard = (function(){
 			
 			header = document.createElement('div');
 			header.className = 'header';
+			header.innerText = homerDashboardData.name;
 			
 			content = document.createElement('div');
 			content.className = 'content';
@@ -39,7 +43,7 @@ HomerDashboard = (function(){
 
 HomerDashboardData = (function(){
 	
-	return function(dataTarget){
-		this.name = dataTarget;
+	return function(dto){
+		Object.assign(this, dto);
 	}
 })();
