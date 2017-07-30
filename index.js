@@ -8,10 +8,17 @@ HomerDashboard = (function(){
 		this.show = function(){
 			try{
 				if(!this.entity) throw 'entity not found';
+				this.build();
 			}catch(e){
 				console.log('Cannot show dashboard caused by: ', e);
 			}
-		}
+		};
+		
+		this.__proto__.build = function(){
+			var container = document.createElement('div');
+			container.className = this.class + '-window';
+			this.entity.append(container);
+		};
 	}
 })();
 
