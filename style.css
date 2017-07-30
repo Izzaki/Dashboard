@@ -22,6 +22,9 @@
 .homer-dashboard > .content > .bar-down{
 }
 
+.homer-dashboard > .content > .chart{
+}
+
 .homer-dashboard > .content > .legend{
 }
 
@@ -31,5 +34,5 @@
 .homer-dashboard > .content > .right-cell > .number{
 }
 
-.homer-dashboard > .content > .right-cell > .number{
+.homer-dashboard > .content > .right-cell > .button{
 }
