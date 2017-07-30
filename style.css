@@ -1,0 +1,35 @@
+.homer-dashboard{
+	/* display: none; */
+	background-color: white;
+	border: solid 1px #8ebbda;
+	border-radius: 2px;
+	margin: 6px;
+}
+
+.homer-dashboard > .header{
+	background-color: #daeefb;
+}
+
+.homer-dashboard > .content{
+}
+
+.homer-dashboard > .content > .column-left{
+}
+
+.homer-dashboard > .content > .bar-up{
+}
+
+.homer-dashboard > .content > .bar-down{
+}
+
+.homer-dashboard > .content > .legend{
+}
+
+.homer-dashboard > .content > .right-cell{
+}
+
+.homer-dashboard > .content > .right-cell > .number{
+}
+
+.homer-dashboard > .content > .right-cell > .number{
+}
