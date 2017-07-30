@@ -16,7 +16,7 @@ HomerDashboard = (function(){
 		
 		this.__proto__.build = function(){
 			var container = document.createElement('div');
-			container.className = this.class + '-window';
+			container.className = 'content';
 			this.entity.append(container);
 		};
 	}
