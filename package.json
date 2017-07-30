@@ -1,0 +1,19 @@
+{
+  "name": "homerwork",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Izzaki@bitbucket.org/Izzaki/homerwork.git"
+  },
+  "keywords": [
+    "dashboard"
+  ],
+  "author": "Robert Więcławek",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/Izzaki/homerwork#readme"
+}
