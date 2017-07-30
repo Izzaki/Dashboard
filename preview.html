@@ -1,7 +1,14 @@
 <meta charset="UTF-8"/>
+<link href="style.css" rel="stylesheet"/>
 <script src="index.js"></script>
 
 <!-- Usage -->
 <!-- create element with class="homer-dashboard" -->
 <!-- assign data-target="{your HomerDashboardData object name}" -->
-<div class="homer-dashboard" data-target="revenueBySolution"></div>
+<div class="homer-dashboard" data-target="Revenue By Solution"></div>
+
+<!-- Example usage -->
+<script>
+	hd = new HomerDashboard({name: 'Revenue By Solution'});
+	hd.show();
+</script>
