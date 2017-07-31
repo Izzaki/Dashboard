@@ -5,7 +5,7 @@ HomerDashboard = (function(){
 		homerDashboardData = new HomerDashboardData(dto);
 		
 		this.class = 'homer-dashboard'; // name of class HomerDashboard should search for
-		this.entity = document.querySelector(`.${this.class}[data-target="${homerDashboardData.name}"]`); 
+		this.entity = document.querySelector(`.${this.class}[data-name="${homerDashboardData.name}"]`); 
 		this.body = {};
 		
 		this.show = function(){
@@ -19,24 +19,39 @@ HomerDashboard = (function(){
 		};
 		
 		this.__proto__.build = function(){
-			self = this;
+			var self = this;
+			var build = {}; // div's pool
 			
-			header = document.createElement('div');
-			header.className = 'header';
-			header.innerText = homerDashboardData.name;
-			
-			content = document.createElement('div');
-			content.className = 'content';
-			
-			'column-left bar-down chart legend right-cell number'
+			'content header side-left side-right column-left chart bar-up bar-down legend number button'
 				.split(' ')
 				.forEach(className => {
 					var element = document.createElement('div');
 					element.className = className;
-					content.appendChild(element);
+					build[className] = element;
 				});
 				
-			this.entity.append(header, content);
+			build.header.innerText = homerDashboardData.name;
+			build['bar-up'].innerText = homerDashboardData.description;
+			
+			build['side-left'].append(
+				build['bar-up'],
+				build['column-left'],
+				build['chart'],
+				build['bar-down'],
+				build['legend']
+			);
+			
+			build['side-right'].append(
+				build['number'],
+				build['button']
+			);
+			
+			build.content.append(
+				build['side-left'],
+				build['side-right'],
+			);
+				
+			this.entity.append(build.header, build.content);
 		};
 	}
 })();
