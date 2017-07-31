@@ -8,31 +8,57 @@
 
 .homer-dashboard > .header{
 	background-color: #daeefb;
+	padding: 6px;
+	color: #0d4760;
+	font-weight: bold;
 }
 
 .homer-dashboard > .content{
+	padding: 6px;
+	min-height: 20px;
+	box-sizing: border-box;
 }
 
-.homer-dashboard > .content > .column-left{
+/* content left side  */
+.homer-dashboard > .content > .side-left{
+	display: inline-block;
+	vertical-align: top;
+	width: 70%;
 }
 
-.homer-dashboard > .content > .bar-up{
+.homer-dashboard > .content > .side-left > .column-left{
+	display: inline-block;
+	vertical-align: top;
+	width: 15%;
 }
 
-.homer-dashboard > .content > .bar-down{
+.homer-dashboard > .content > .side-left > .bar-up{
+	text-align: right;
+	text-size: 8px;
 }
 
-.homer-dashboard > .content > .chart{
+.homer-dashboard > .content > .side-left > .bar-down{
+	padding-left: 15%;
 }
 
-.homer-dashboard > .content > .legend{
+.homer-dashboard > .content > .side-left > .chart{
+	display: inline-block;
+	vertical-align: top;
+	width: 85%;
 }
 
-.homer-dashboard > .content > .right-cell{
+.homer-dashboard > .content > .side-left > .legend{
 }
 
-.homer-dashboard > .content > .right-cell > .number{
+/* content right side  */
+.homer-dashboard > .content > .side-right{
+	display: inline-block;
+	vertical-align: top;
+	width: 30%;
 }
 
-.homer-dashboard > .content > .right-cell > .button{
+.homer-dashboard > .content > .side-right > .number{
+}
+
+.homer-dashboard > .content > .side-right > .button{
 }
