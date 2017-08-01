@@ -5,6 +5,9 @@
 	border-radius: 2px;
 	margin: 6px;
 }
+.homer-dashboard *{
+	box-sizing: border-box;
+}
 
 .homer-dashboard > .header{
 	background-color: #daeefb;
@@ -16,7 +19,6 @@
 .homer-dashboard > .content{
 	padding: 6px;
 	min-height: 20px;
-	box-sizing: border-box;
 }
 
 /* content left side  */
@@ -45,6 +47,11 @@
 	display: inline-block;
 	vertical-align: top;
 	width: 85%;
+	border: solid 1px #e3e3e3;
+}
+
+.homer-dashboard > .content > .side-left > .chart > svg{
+	width: 100%;
 }
 
 .homer-dashboard > .content > .side-left > .legend{
