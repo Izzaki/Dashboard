@@ -121,6 +121,7 @@ HomerDashboard = (function(){
 			build['column-left'].append.apply(build['column-left'], this.makeLeftColumn());
 			build['bar-down'].append.apply(build['bar-down'], this.makeBarDown());
 			build['legend'].append(this.makeLegend());
+			build['number'].append(this.makeNumber());
 
 			
 			build['side-left'].append(
@@ -199,5 +200,28 @@ HomerDashboard = (function(){
 			}
 			return legend;
 		};
+		
+		this.__proto__.makeNumber = function(){
+			var summary = 0;
+			for(label in homerDashboardData.chart){
+				var entity = homerDashboardData.chart[label];
+				summary += entity.points.reduce((acumulator, value)=>{
+					return acumulator + value;
+				});
+			};
+			
+			var div = document.createElement('div');
+			var leftLabel = document.createElement('leftlabel');
+			leftLabel.innerText = `${homerDashboardData.leftLabel}`;
+			
+			var summaryHTML = document.createElement('span');
+			summaryHTML.innerText = `${summary}`;
+			
+			var textSummary = document.createElement('summary');
+			textSummary.innerText = 'Summary';
+			
+			div.append(leftLabel, summaryHTML, textSummary);
+			return div;
+		}
 	}
 })();
