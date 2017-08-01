@@ -9,26 +9,32 @@
 
 <!-- Example usage -->
 <script>
+	console.clear();
+	
 	exampleDto = {
 		name: 'Revenue By Solution',
 		description: 'Revenue per week',
-		values: {
+		chart: {
 			NetComp: {
 				name: 'NetComp',
-				values: {
-					1: {
-						column: 'Week 48',
-						row: 250
+				points: [
+					{
+						ax: 'Week 48',
+						value: 125
 					},
-					2: {
-						column: 'Week 49',
-						row: 250
+					{
+						ax: 'Week 49',
+						value: 250
 					},
-					3: {
-						column: 'Week 50',
-						row: 250
+					{
+						ax: 'Week 50',
+						value: 200
+					},
+					{
+						ax: 'Week 51',
+						value: 250
 					}
-				}
+				]
 			}
 		}
 	};
