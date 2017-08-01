@@ -4,6 +4,8 @@
 	border: solid 1px #8ebbda;
 	border-radius: 2px;
 	margin: 6px;
+	font-size: 16px;
+	font-family: arial;
 }
 .homer-dashboard *{
 	box-sizing: border-box;
@@ -51,6 +53,7 @@
 	text-align: right;
 	text-size: 8px;
 	color: #333;
+	font-size: 14px;
 }
 
 .homer-dashboard > .content > .side-left > .bar-down{
@@ -91,6 +94,7 @@
 .homer-dashboard > .content > .side-left > .legend > ul{
 	display: flex;
 	justify-content: center;
+	margin: 8px 0px 2px;
 }
 
 

@@ -47,13 +47,13 @@ HomerDashboard = (function(){
 					circle.setAttribute('r', 6);
 					circle.setAttribute('fill', color);
 					circle.setAttribute('cx', (index +chartCenteringOffset) *columnWidth +'%');
-					circle.setAttribute('cy', 100 -value/highestValue*100 +'%');
+					circle.setAttribute('cy', 100 -10 -value/highestValue*80 +'%');
 					
 					var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
 					line.setAttribute('x1', (index +chartCenteringOffset) *columnWidth +'%');
-					line.setAttribute('y1', 100 -value/highestValue*100 +'%');
+					line.setAttribute('y1', 100 -10 -value/highestValue*80 +'%');
 					line.setAttribute('x2', (previousPointIndex +chartCenteringOffset) *columnWidth +'%');
-					line.setAttribute('y2', 100 -previousPoint/highestValue*100 +'%');
+					line.setAttribute('y2', 100 -10 -previousPoint/highestValue*80 +'%');
 					line.setAttribute('stroke', color);
 					line.setAttribute('stroke-width', '4');
 
@@ -155,7 +155,7 @@ HomerDashboard = (function(){
 				values.push(...entity.points.map((value)=>{
 					valueHTML = document.createElement('value');
 					valueHTML.innerText = value;
-					valueHTML.style.top = 100 -value/highestValue*100 +'%'
+					valueHTML.style.top = 100 -10 -value/highestValue*80 +'%'
 					return valueHTML;
 				}));
 			}
