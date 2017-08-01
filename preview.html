@@ -14,31 +14,28 @@
 	exampleDto = {
 		name: 'Revenue By Solution',
 		description: 'Revenue per week',
+		
+		labelPrefix: 'Week',
+		labelPostfix: '',
+		labels: [48, 49, 50, 51],
+		
+		leftLabel: '$',
 		chart: {
 			NetComp: {
-				name: 'NetComp',
-				points: [
-					{
-						ax: 'Week 48',
-						value: 125
-					},
-					{
-						ax: 'Week 49',
-						value: 250
-					},
-					{
-						ax: 'Week 50',
-						value: 200
-					},
-					{
-						ax: 'Week 51',
-						value: 250
-					}
-				]
+				points: [125, 250, 200, 250]
+			},
+			
+			AnalyzerHR: {
+				points: [75, 100, 120, 190]
+			},
+			
+			QuestionRight: {
+				points: [25, 50, 70, 90]
 			}
 		}
 	};
 	
 	hd = new HomerDashboard(exampleDto);
+	hd.chart('line');
 	hd.show();
 </script>
