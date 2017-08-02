@@ -44,23 +44,16 @@ HomerDashboard = (function(){
 			drawFunctions: {
 				line: function({value, index, chartCenteringOffset, columnWidth, highestValue, previousPoint, previousPointIndex, color}){
 					var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-					circle.setAttribute('r', 6);
+					circle.setAttribute('r', 7);
 					circle.setAttribute('fill', color);
 					circle.setAttribute('cx', (index +chartCenteringOffset) *columnWidth +'%');
 					circle.setAttribute('cy', 100 -10 -value/highestValue*80 +'%');
 					circle.setAttribute('value', value);
 					
-					/*
-					var description = document.createElement('div');
-					description.className = 'description';
-					description.innerText = value;
-					description.style.display = 'block';
-					*/
-					
 					var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-					line.setAttribute('x1', (index +chartCenteringOffset) *columnWidth +'%');
+					line.setAttribute('x1', (index +chartCenteringOffset) *columnWidth-0.7 +'%');
 					line.setAttribute('y1', 100 -10 -value/highestValue*80 +'%');
-					line.setAttribute('x2', (previousPointIndex +chartCenteringOffset) *columnWidth +'%');
+					line.setAttribute('x2', (previousPointIndex +chartCenteringOffset) *columnWidth+0.7 +'%');
 					line.setAttribute('y2', 100 -10 -previousPoint/highestValue*80 +'%');
 					line.setAttribute('stroke', color);
 					line.setAttribute('stroke-width', '4');
@@ -236,8 +229,8 @@ HomerDashboard = (function(){
 		
 		this.__proto__.makeCirclesHoverable = function(){
 			this.entity.querySelectorAll('circle').forEach(circle=>{
+
 				circle.onmouseover = (e)=>{
-					console.log('hovering');
 					this.drawTooltip({
 						value: circle.getAttribute('value'),
 						position: {x: e.layerX, y: e.layerY}
@@ -253,11 +246,13 @@ HomerDashboard = (function(){
 		this.__proto__.drawTooltip = function({value, position}){
 			var tooltip = this.tooltip;
 			tooltip.innerText = `${homerDashboardData.leftLabel}${value}`;
-			tooltip.style.display = 'block';
 			tooltip.style.transform = `translate(${position.x}px, ${position.y}px)`;
+			tooltip.style.opacity = 1;
+			tooltip.style.display = 'block';
 		};
 		
 		this.__proto__.hideTooltip = function(){
+			this.tooltip.style.opacity = 0;
 			this.tooltip.style.display = 'none';
 		};
 	}

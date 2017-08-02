@@ -81,10 +81,11 @@
 .homer-dashboard > .content > .side-left > .chart > .tooltip{
 	position: absolute;
 	left: 0px;
-	top: -30px;
+	top: -32px;
 	background-color: white;
 	border: solid 1px #8ebbda;
-	padding: 2px 4px;
+	border-radius: 10px 10px 10px 1px;
+	padding: 3px 6px;
 }
 
 /* SVG */
