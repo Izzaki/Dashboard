@@ -71,18 +71,35 @@
 }
 
 .homer-dashboard > .content > .side-left > .chart{
+	position: relative;
 	display: inline-block;
 	vertical-align: top;
 	width: 90%;
 	border: solid 1px #e3e3e3;
 }
 
+.homer-dashboard > .content > .side-left > .chart > .tooltip{
+	position: absolute;
+	left: 0px;
+	top: -30px;
+	background-color: white;
+	border: solid 1px #8ebbda;
+	padding: 2px 4px;
+}
+
+/* SVG */
 .homer-dashboard > .content > .side-left > .chart > svg{
 	width: 100%;
 	height: 150px;
 }
 .homer-dashboard > .content > .side-left > .chart > svg circle{
 	cursor: pointer;
+}
+.homer-dashboard > .content > .side-left > .chart > svg *{
+	cursor: pointer;
+}
+.homer-dashboard > .content > .side-left > .chart > svg circle:hover{
+	opacity: 0.5;
 }
 
 .homer-dashboard > .content > .side-left > .legend{

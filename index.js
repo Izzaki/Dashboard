@@ -48,6 +48,14 @@ HomerDashboard = (function(){
 					circle.setAttribute('fill', color);
 					circle.setAttribute('cx', (index +chartCenteringOffset) *columnWidth +'%');
 					circle.setAttribute('cy', 100 -10 -value/highestValue*80 +'%');
+					circle.setAttribute('value', value);
+					
+					/*
+					var description = document.createElement('div');
+					description.className = 'description';
+					description.innerText = value;
+					description.style.display = 'block';
+					*/
 					
 					var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
 					line.setAttribute('x1', (index +chartCenteringOffset) *columnWidth +'%');
@@ -56,7 +64,6 @@ HomerDashboard = (function(){
 					line.setAttribute('y2', 100 -10 -previousPoint/highestValue*80 +'%');
 					line.setAttribute('stroke', color);
 					line.setAttribute('stroke-width', '4');
-
 					
 					var group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 					group.append(line, circle);
@@ -86,7 +93,7 @@ HomerDashboard = (function(){
 		homerDashboardData = new HomerDashboardData(dto);
 		
 		this.class = 'homer-dashboard'; // name of class HomerDashboard should search for
-		this.entity = document.querySelector(`.${this.class}[data-name="${homerDashboardData.name}"]`); 
+		this.entity = document.querySelector(`.${this.class}[data-name="${homerDashboardData.name}"]`);
 		this.body = {};
 		
 		this.show = function(){
@@ -94,6 +101,7 @@ HomerDashboard = (function(){
 				if(!this.entity) throw 'entity not found';
 				this.build();
 				this.entity.style.display = 'block';
+				this.makeCirclesHoverable();
 			}catch(e){
 				console.log('Cannot show dashboard caused by: ', e);
 			}
@@ -107,7 +115,7 @@ HomerDashboard = (function(){
 			var self = this;
 			var build = {}; // div's pool
 			
-			'content header side-left side-right column-left chart bar-up bar-down legend number button'
+			'content header side-left side-right column-left chart bar-up bar-down legend number button tooltip'
 				.split(' ')
 				.forEach(className => {
 					var element = document.createElement('div');
@@ -122,7 +130,7 @@ HomerDashboard = (function(){
 			build['bar-down'].append.apply(build['bar-down'], this.makeBarDown());
 			build['legend'].append(this.makeLegend());
 			build['number'].append(this.makeNumber());
-
+			this.tooltip = build['tooltip'];
 			
 			build['side-left'].append(
 				build['bar-up'],
@@ -131,6 +139,8 @@ HomerDashboard = (function(){
 				build['bar-down'],
 				build['legend']
 			);
+			
+			build['chart'].append(build['tooltip']);
 			
 			build['side-right'].append(
 				build['number'],
@@ -222,6 +232,33 @@ HomerDashboard = (function(){
 			
 			div.append(leftLabel, summaryHTML, textSummary);
 			return div;
-		}
+		};
+		
+		this.__proto__.makeCirclesHoverable = function(){
+			this.entity.querySelectorAll('circle').forEach(circle=>{
+				circle.onmouseover = (e)=>{
+					console.log('hovering');
+					this.drawTooltip({
+						value: circle.getAttribute('value'),
+						position: {x: e.layerX, y: e.layerY}
+					});
+				};
+				
+				circle.onmouseout = (e)=>{
+					this.hideTooltip();
+				};
+			});
+		};
+		
+		this.__proto__.drawTooltip = function({value, position}){
+			var tooltip = this.tooltip;
+			tooltip.innerText = `${homerDashboardData.leftLabel}${value}`;
+			tooltip.style.display = 'block';
+			tooltip.style.transform = `translate(${position.x}px, ${position.y}px)`;
+		};
+		
+		this.__proto__.hideTooltip = function(){
+			this.tooltip.style.display = 'none';
+		};
 	}
 })();
