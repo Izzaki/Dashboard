@@ -13,6 +13,7 @@ HomerDashboard = (function(){
 			var self = this;
 			var highestValue = this.getHighestValue(homerDashboardData);
 			var colorIndex = 0;
+			var entityIndex = 0;
 			for(label in homerDashboardData.chart){
 				var entity = homerDashboardData.chart[label];
 				var pointsQuantity = entity.points.length;
@@ -24,10 +25,21 @@ HomerDashboard = (function(){
 					...entity.points.map((value, index, points)=>{
 						var previousPointIndex = points[index-1] ? index-1 : 0;
 						var previousPoint = points[index-1] ? points[index-1] : value;
-						return this.draw({value, index, chartCenteringOffset, columnWidth, highestValue, previousPoint, previousPointIndex, color: this.getColorByIndex(colorIndex)});
+						return this.draw({
+							value, 
+							index, 
+							chartCenteringOffset, 
+							columnWidth, 
+							highestValue, 
+							previousPoint, 
+							previousPointIndex, 
+							color: this.getColorByIndex(colorIndex),
+							entityIndex
+						});
 					})
 				);
 				colorIndex++;
+				entityIndex++;
 				svg.append(group);
 			}
 			
@@ -62,6 +74,17 @@ HomerDashboard = (function(){
 					group.append(line, circle);
 					
 					return group;
+				},
+				graph: function({value, index, chartCenteringOffset, columnWidth, highestValue, entityIndex, color}){
+					var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+					console.log(entityIndex);
+					rect.setAttribute('x', (index +chartCenteringOffset -0.2) *columnWidth-0.7 +entityIndex*columnWidth/5 -0.7 +'%');
+					rect.setAttribute('y', 100 -10 -value/highestValue*80 +'%');
+					rect.setAttribute('width', columnWidth/(Object.keys(homerDashboardData.chart).length*3) +'%');
+					rect.setAttribute('height', 10 +value/highestValue*80 +'%');
+					rect.setAttribute('fill', color);
+					
+					return rect;
 				}
 			},
 			draw(data){
