@@ -104,156 +104,158 @@ HomerDashboard = (function(){
 			SVGRenderer.chart(drawFunctionName);
 		};
 		
-		this.__proto__.build = function(){
-			var self = this;
-			var build = {}; // div's pool
-			
-			'content header side-left side-right column-left chart bar-up bar-down legend number button tooltip'
-				.split(' ')
-				.forEach(className => {
-					var element = document.createElement('div');
-					element.className = className;
-					build[className] = element;
-				});
+		this.__proto__ = {
+			build: function(){
+				var self = this;
+				var build = {}; // div's pool
 				
-			build.header.innerText = homerDashboardData.name;
-			build['bar-up'].innerText = homerDashboardData.description;
-			build.chart.append(SVGRenderer.render(homerDashboardData));
-			build['column-left'].append.apply(build['column-left'], this.makeLeftColumn());
-			build['bar-down'].append.apply(build['bar-down'], this.makeBarDown());
-			build['legend'].append(this.makeLegend());
-			build['number'].append(this.makeNumber());
-			this.tooltip = build['tooltip'];
-			
-			build['side-left'].append(
-				build['bar-up'],
-				build['column-left'],
-				build['chart'],
-				build['bar-down'],
-				build['legend']
-			);
-			
-			build['chart'].append(build['tooltip']);
-			
-			build['side-right'].append(
-				build['number'],
-				build['button']
-			);
-			
-			build.content.append(
-				build['side-left'],
-				build['side-right'],
-			);
+				'content header side-left side-right column-left chart bar-up bar-down legend number button tooltip'
+					.split(' ')
+					.forEach(className => {
+						var element = document.createElement('div');
+						element.className = className;
+						build[className] = element;
+					});
+					
+				build.header.innerText = homerDashboardData.name;
+				build['bar-up'].innerText = homerDashboardData.description;
+				build.chart.append(SVGRenderer.render(homerDashboardData));
+				build['column-left'].append.apply(build['column-left'], this.makeLeftColumn());
+				build['bar-down'].append.apply(build['bar-down'], this.makeBarDown());
+				build['legend'].append(this.makeLegend());
+				build['number'].append(this.makeNumber());
+				this.tooltip = build['tooltip'];
 				
-			this.entity.append(build.header, build.content);
-		};
+				build['side-left'].append(
+					build['bar-up'],
+					build['column-left'],
+					build['chart'],
+					build['bar-down'],
+					build['legend']
+				);
+				
+				build['chart'].append(build['tooltip']);
+				
+				build['side-right'].append(
+					build['number'],
+					build['button']
+				);
+				
+				build.content.append(
+					build['side-left'],
+					build['side-right'],
+				);
+					
+				this.entity.append(build.header, build.content);
+			},
 		
-		this.__proto__.makeLeftColumn = function(){
-			var values = [];
-			
-			for(label in homerDashboardData.chart){
-				var entity = homerDashboardData.chart[label];
-				var highestValue = SVGRenderer.getHighestValue(homerDashboardData);
+			makeLeftColumn: function(){
+				var values = [];
 				
-				values.push(...entity.points.map((value)=>{
-					valueHTML = document.createElement('value');
-					valueHTML.innerText = value;
-					valueHTML.style.top = 100 -10 -value/highestValue*80 +'%'
-					return valueHTML;
-				}));
-			}
-			
-			return values;
-		};
-		
-		this.__proto__.makeBarDown = function(){
-			var labels = [];
-			var chartCenteringOffset = 0.5;
-			var columnWidth = 100/homerDashboardData.labels.length;
-			
-			for(index in homerDashboardData.labels){
-				var label = homerDashboardData.labels[index];
+				for(label in homerDashboardData.chart){
+					var entity = homerDashboardData.chart[label];
+					var highestValue = SVGRenderer.getHighestValue(homerDashboardData);
+					
+					values.push(...entity.points.map((value)=>{
+						valueHTML = document.createElement('value');
+						valueHTML.innerText = value;
+						valueHTML.style.top = 100 -10 -value/highestValue*80 +'%'
+						return valueHTML;
+					}));
+				}
 				
-				var labelHTML = document.createElement('label');
-				labelHTML.innerText = `${homerDashboardData.labelPrefix} ${label} ${homerDashboardData.labelPostfix}`;
-				labelHTML.style.left = (Number(index) +chartCenteringOffset) *columnWidth +'%'
-				labels.push(labelHTML);
-			}
+				return values;
+			},
 			
-			return labels;
-		};
-		
-		this.__proto__.makeLegend = function(){
-			var legend = document.createElement('ul');
-			var colorIndex = 0;
-			
-			for(index in homerDashboardData.chart){
+			makeBarDown: function(){
+				var labels = [];
+				var chartCenteringOffset = 0.5;
+				var columnWidth = 100/homerDashboardData.labels.length;
 				
-				li = document.createElement('li');
-				li.style.color = SVGRenderer.getColorByIndex(colorIndex);
+				for(index in homerDashboardData.labels){
+					var label = homerDashboardData.labels[index];
+					
+					var labelHTML = document.createElement('label');
+					labelHTML.innerText = `${homerDashboardData.labelPrefix} ${label} ${homerDashboardData.labelPostfix}`;
+					labelHTML.style.left = (Number(index) +chartCenteringOffset) *columnWidth +'%'
+					labels.push(labelHTML);
+				}
 				
-				span = document.createElement('span');
-				span.style.color = '#333';
-				span.innerText = `${index}`;
+				return labels;
+			},
+			
+			makeLegend: function(){
+				var legend = document.createElement('ul');
+				var colorIndex = 0;
 				
-				li.append(span);
-				legend.append(li);
-				
-				colorIndex++;
-			}
-			return legend;
-		};
-		
-		this.__proto__.makeNumber = function(){
-			var summary = 0;
-			for(label in homerDashboardData.chart){
-				var entity = homerDashboardData.chart[label];
-				summary += entity.points.reduce((acumulator, value)=>{
-					return acumulator + value;
-				});
-			};
+				for(index in homerDashboardData.chart){
+					
+					li = document.createElement('li');
+					li.style.color = SVGRenderer.getColorByIndex(colorIndex);
+					
+					span = document.createElement('span');
+					span.style.color = '#333';
+					span.innerText = `${index}`;
+					
+					li.append(span);
+					legend.append(li);
+					
+					colorIndex++;
+				}
+				return legend;
+			},
 			
-			var div = document.createElement('div');
-			var leftLabel = document.createElement('leftlabel');
-			leftLabel.innerText = `${homerDashboardData.leftLabel}`;
-			
-			var summaryHTML = document.createElement('span');
-			summaryHTML.innerText = `${summary}`;
-			
-			var textSummary = document.createElement('summary');
-			textSummary.innerText = 'Summary';
-			
-			div.append(leftLabel, summaryHTML, textSummary);
-			return div;
-		};
-		
-		this.__proto__.makeCirclesHoverable = function(){
-			this.entity.querySelectorAll('circle').forEach(circle=>{
-
-				circle.onmouseover = (e)=>{
-					this.drawTooltip({
-						value: circle.getAttribute('value'),
-						position: {x: e.layerX, y: e.layerY}
+			makeNumber: function(){
+				var summary = 0;
+				for(label in homerDashboardData.chart){
+					var entity = homerDashboardData.chart[label];
+					summary += entity.points.reduce((acumulator, value)=>{
+						return acumulator + value;
 					});
 				};
 				
-				circle.onmouseout = (e)=>{
-					this.hideTooltip();
-				};
-			});
-		};
-		
-		this.__proto__.drawTooltip = function({value, position}){
-			var tooltip = this.tooltip;
-			tooltip.innerText = `${homerDashboardData.leftLabel}${value}`;
-			tooltip.style.transform = `translate(${position.x}px, ${position.y}px)`;
-			tooltip.style.opacity = 1;
-			tooltip.style.display = 'block';
-		};
-		
-		this.__proto__.hideTooltip = function(){
-			this.tooltip.style.opacity = 0;
-			this.tooltip.style.display = 'none';
-		};
+				var div = document.createElement('div');
+				var leftLabel = document.createElement('leftlabel');
+				leftLabel.innerText = `${homerDashboardData.leftLabel}`;
+				
+				var summaryHTML = document.createElement('span');
+				summaryHTML.innerText = `${summary}`;
+				
+				var textSummary = document.createElement('summary');
+				textSummary.innerText = 'Summary';
+				
+				div.append(leftLabel, summaryHTML, textSummary);
+				return div;
+			},
+			
+			makeCirclesHoverable: function(){
+				this.entity.querySelectorAll('circle').forEach(circle=>{
+
+					circle.onmouseover = (e)=>{
+						this.drawTooltip({
+							value: circle.getAttribute('value'),
+							position: {x: e.layerX, y: e.layerY}
+						});
+					};
+					
+					circle.onmouseout = (e)=>{
+						this.hideTooltip();
+					};
+				});
+			},
+			
+			drawTooltip: function({value, position}){
+				var tooltip = this.tooltip;
+				tooltip.innerText = `${homerDashboardData.leftLabel}${value}`;
+				tooltip.style.transform = `translate(${position.x}px, ${position.y}px)`;
+				tooltip.style.opacity = 1;
+				tooltip.style.display = 'block';
+			},
+			
+			hideTooltip: function(){
+				this.tooltip.style.opacity = 0;
+				this.tooltip.style.display = 'none';
+			}
+		}
 	}
 })();
