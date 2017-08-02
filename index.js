@@ -181,7 +181,7 @@ HomerDashboard = (function(){
 				for(let i=1; i<=2; i++){
 					valueHTML = document.createElement('value');
 					valueHTML.innerText = highestValue* 1/i;
-					valueHTML.style.top = 100 -100/i +'%'
+					valueHTML.style.top = 100-10 -80/i +'%'
 					values.push(valueHTML);
 				};
 				valueHTML = document.createElement('value');
