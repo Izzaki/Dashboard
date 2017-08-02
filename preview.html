@@ -5,14 +5,16 @@
 <!-- Usage -->
 <!-- create element with class="homer-dashboard" -->
 <!-- assign data-name="{your DTO object name property}" -->
-<div class="homer-dashboard" data-name="Revenue By Solution"></div>
+<div class="homer-dashboard" data-name="Revenue By Solution Line"></div>
+<div class="homer-dashboard" data-name="Revenue By Solution Graph"></div>
 
 <!-- Example usage -->
 <script>
 	console.clear();
 	
+	// 1# Example
 	exampleDto = {
-		name: 'Revenue By Solution',
+		name: 'Revenue By Solution Line',
 		description: 'Revenue per week',
 		
 		labelPrefix: 'Week',
@@ -36,7 +38,35 @@
 	};
 	
 	hd = new HomerDashboard(exampleDto);
-	//hd.chart('graph');
-	hd.chart('line');
+	hd.chart('line'); // line / graph  . line is default
 	hd.show();
+	
+	// 2# Example
+	exampleDto2 = {
+		name: 'Revenue By Solution Graph',
+		description: 'Revenue per week',
+		
+		labelPrefix: 'Week',
+		labelPostfix: '',
+		labels: [48, 49, 50, 51, 52],
+		
+		leftLabel: '$',
+		chart: {
+			NetComp: {
+				points: [125, 160, 200, 250, 310]
+			},
+			
+			AnalyzerHR: {
+				points: [75, 100, 130, 180, 230]
+			},
+			
+			QuestionRight: {
+				points: [25, 50, 70, 90, 140]
+			}
+		}
+	};
+	
+	hd2 = new HomerDashboard(exampleDto2);
+	hd2.chart('graph');
+	hd2.show();
 </script>

@@ -1,6 +1,6 @@
 HomerDashboard = (function(){
 	
-	// dto entity
+	// data entity
 	HomerDashboardData = function(dto){
 		Object.assign(this, dto);
 	};
@@ -77,7 +77,6 @@ HomerDashboard = (function(){
 				},
 				graph: function({value, index, chartCenteringOffset, columnWidth, highestValue, entityIndex, color}){
 					var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-					console.log(entityIndex);
 					rect.setAttribute('x', (index +chartCenteringOffset -0.2) *columnWidth-0.7 +entityIndex*columnWidth/5 -0.7 +'%');
 					rect.setAttribute('y', 100 -10 -value/highestValue*80 +'%');
 					rect.setAttribute('width', columnWidth/(Object.keys(homerDashboardData.chart).length*3) +'%');
@@ -172,6 +171,7 @@ HomerDashboard = (function(){
 				this.entity.append(build.header, build.content);
 			},
 		
+			// building elements
 			makeLeftColumn: function(){
 				var values = [];
 				
