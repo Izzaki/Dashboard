@@ -152,17 +152,19 @@ HomerDashboard = (function(){
 			makeLeftColumn: function(){
 				var values = [];
 				
-				for(label in homerDashboardData.chart){
-					var entity = homerDashboardData.chart[label];
-					var highestValue = SVGRenderer.getHighestValue(homerDashboardData);
+				var entity = homerDashboardData.chart[label];
+				var highestValue = SVGRenderer.getHighestValue(homerDashboardData);
 					
-					values.push(...entity.points.map((value)=>{
-						valueHTML = document.createElement('value');
-						valueHTML.innerText = value;
-						valueHTML.style.top = 100 -10 -value/highestValue*80 +'%'
-						return valueHTML;
-					}));
-				}
+				for(let i=1; i<=2; i++){
+					valueHTML = document.createElement('value');
+					valueHTML.innerText = highestValue* 1/i;
+					valueHTML.style.top = 100 -100/i +'%'
+					values.push(valueHTML);
+				};
+				valueHTML = document.createElement('value');
+				valueHTML.innerText = homerDashboardData.leftLabel;
+				valueHTML.style.bottom = 0 +'%';
+				values.push(valueHTML);
 				
 				return values;
 			},
