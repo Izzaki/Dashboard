@@ -82,6 +82,7 @@ HomerDashboard = (function(){
 					rect.setAttribute('width', columnWidth/(Object.keys(homerDashboardData.chart).length*3) +'%');
 					rect.setAttribute('height', 10 +value/highestValue*80 +'%');
 					rect.setAttribute('fill', color);
+					rect.setAttribute('value', value);
 					
 					return rect;
 				}
@@ -109,17 +110,17 @@ HomerDashboard = (function(){
 		
 		this.class = 'homer-dashboard'; // name of class HomerDashboard should search for
 		this.entity = document.querySelector(`.${this.class}[data-name="${homerDashboardData.name}"]`);
-		this.body = {};
+		this.builded = false;
 		
 		this.show = function(){
-			try{
-				if(!this.entity) throw 'entity not found';
-				this.build();
-				this.entity.style.display = 'block';
-				this.makeCirclesHoverable();
-			}catch(e){
-				console.log('Cannot show dashboard caused by: ', e);
-			}
+			if(!this.validate()) return;
+			if(!this.builded) this.build();
+			this.entity.style.display = 'block';
+		};
+		
+		this.hide = function(){
+			if(!this.validate()) return;
+			this.entity.style.display = 'none';
 		};
 		
 		this.chart = function(drawFunctionName){
@@ -127,6 +128,15 @@ HomerDashboard = (function(){
 		};
 		
 		this.__proto__ = {
+			validate: function(){
+				try{
+					if(!this.entity) throw 'entity has not found';
+					return true;
+				}catch(e){
+					console.log('Dashboard do not pass validation because: ', e);
+					return false;
+				}
+			},
 			build: function(){
 				var self = this;
 				var build = {}; // div's pool
@@ -169,6 +179,8 @@ HomerDashboard = (function(){
 				);
 					
 				this.entity.append(build.header, build.content);
+				this.makeElementsHoverable();
+				this.builded = true;
 			},
 		
 			// building elements
@@ -253,8 +265,8 @@ HomerDashboard = (function(){
 				return div;
 			},
 			
-			makeCirclesHoverable: function(){
-				this.entity.querySelectorAll('circle').forEach(circle=>{
+			makeElementsHoverable: function(){
+				this.entity.querySelectorAll('circle, rect').forEach(circle=>{
 
 					circle.onmouseover = (e)=>{
 						this.drawTooltip({
@@ -281,6 +293,6 @@ HomerDashboard = (function(){
 				this.tooltip.style.opacity = 0;
 				this.tooltip.style.display = 'none';
 			}
-		}
+		};
 	}
 })();
