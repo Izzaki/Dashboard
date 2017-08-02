@@ -79,6 +79,7 @@
 }
 
 .homer-dashboard > .content > .side-left > .chart > .tooltip{
+	display: none;
 	position: absolute;
 	left: 0px;
 	top: -32px;
