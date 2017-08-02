@@ -119,6 +119,7 @@
 .homer-dashboard > .content > .side-left > .legend > ul > li{
 	list-style: inside;
 	padding: 0px 15px 0px 15px;
+	white-space: nowrap;
 }
 
 /* content right side  */
