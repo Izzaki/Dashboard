@@ -132,7 +132,7 @@ HomerDashboard = (function(){
 				var self = this;
 				var build = {}; // div's pool
 				
-				'content header side-left side-right column-left chart bar-up bar-down legend number button tooltip'
+				'content header side-left side-right column-left chart bar-up bar-down legend number homer tooltip'
 					.split(' ')
 					.forEach(className => {
 						var element = document.createElement('div');
@@ -161,7 +161,7 @@ HomerDashboard = (function(){
 				
 				build['side-right'].append(
 					build['number'],
-					build['button']
+					build['homer']
 				);
 				
 				build.content.append(

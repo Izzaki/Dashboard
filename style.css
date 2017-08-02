@@ -21,6 +21,7 @@
 .homer-dashboard > .content{
 	padding: 6px;
 	min-height: 20px;
+	height: 226px;
 }
 
 /* content left side  */
@@ -106,7 +107,7 @@
 }
 
 .homer-dashboard > .content > .side-left > .legend{
-	margin-left: 15%;
+	margin-left: 10%;
 	font-size: 12px;
 	text-align: center;
 }
@@ -129,15 +130,21 @@
 	display: inline-block;
 	vertical-align: top;
 	width: 20%;
+	height: 100%;
 }
 
 .homer-dashboard > .content > .side-right .number{
+	display: flex;
 	color: #05415b;
 	font-size: 24px;
 	font-weight: bold;
 	text-align: center;
-	margin-top: 20px;
+	height: 50%;
 }
+.homer-dashboard > .content > .side-right .number > div{
+	margin: auto;
+}
+
 .homer-dashboard > .content > .side-right leftlabel,
 .homer-dashboard > .content > .side-right summary{
 	color: #306a92;
@@ -145,5 +152,19 @@
 	font-weight: bold;
 }
 
-.homer-dashboard > .content > .side-right > .button{
+.homer-dashboard > .content > .side-right > .homer{
+	height: 50%;
+	opacity: 0.3;
+	
+	background-image: url('homer.jpg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center bottom;
+}
+
+/* RWD */
+@media screen and (max-width: 500px){
+	.homer-dashboard > .content > .side-right > .homer{
+		background-image: none;
+	}
 }
