@@ -1,16 +1,20 @@
 **# README #**
+
 Hello.
 
 **# PREVIEW #**
+
 Check `preview.html` to see results
 
 **# INSTALLATION #**
+
 Put these tags:
 
     <link href="HomerDashboard.css" rel="stylesheet"/>
     <script src="HomerDashboard.js"></script>
 
 **# DATA #**
+
 Input data going to show inside the chart has to match this schema:
 
     dto = {
@@ -41,6 +45,7 @@ Notice that the 'name' property of dto has to match HTML tag attribute 'data-nam
 So the HomerDashboard knows where to put the chart.
 
 **# USAGE #**
+
 At very first We should put HTML tag We mentioned above. This tells HomerDashboard where to put the chart.
 So inside our HTML just write:
 
