@@ -6,12 +6,14 @@ Check preview.html to see results
 
 **# INSTALLATION #**
 Put these tags:
+
 	`<link href="HomerDashboard.css" rel="stylesheet"/>
 	<script src="HomerDashboard.js"></script>`
 
 **# DATA #**
 Input data going to show inside the chart has to match this schema:
-	`dto = {
+
+    `dto = {
 		name: 'Revenue By Solution Line',
 		description: 'Revenue per week',
 		
@@ -41,14 +43,17 @@ So the HomerDashboard knows where to put the chart.
 **# USAGE #**
 At very first We should put HTML tag We mentioned above. This tells HomerDashboard where to put the chart.
 So inside our HTML just write:
-	`<div class="homer-dashboard" data-name="Revenue By Solution Line"></div>`
+
+    `<div class="homer-dashboard" data-name="Revenue By Solution Line"></div>`
 
 Make sure of correctness of your DTO object!
+
 	`hd = new HomerDashboard(dto);
 	hd.show();`
 	
 You have 2 chart modes to choose: line and graph. By default line mode is turned on.
 To change mode use chart() method before calling show()
+
 	`hd = new HomerDashboard(dto);
 	hd.chart('graph')
 	hd.show();`
