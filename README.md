@@ -4,7 +4,7 @@ Hello.
 
 **# PREVIEW #**
 
-Check `preview.html` to see results
+![alt text](https://github.com/Izzaki/Dashboard/blob/master/preview.png)
 
 **# INSTALLATION #**
 
